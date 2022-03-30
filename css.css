@@ -1,0 +1,50 @@
+.botao01 {
+	border-radius: 20px;
+	height: 60px;
+	width: 200px;
+	color:blue;
+	background-color: white;
+	font-size:16px;
+	border-color: green;
+
+}
+.botao01:hover {
+	color: red;
+	background-color: blue;
+	
+}.botao01:active {
+	position:relative;
+	top:1px;
+}
+#tabela01
+{
+	display:inline;
+}
+h2
+{
+	text-align: center;
+	margin-top: 0px;
+	margin-bottom:0px;
+	left: 50px;
+}
+#borda
+{
+	width: 1300px;
+    height: 150px;
+    background: grey;
+    color: black;
+    padding: 20px;
+    border: 5px solid #CCC;
+    margin-bottom: 20px;
+}
+h4
+{
+	margin-top: 0px;
+	margin-bottom:0px;
+}
+#titulo
+{
+	font-family: "Times New Roman", Times, serif;
+	color: white;
+	text-align: center;
+}

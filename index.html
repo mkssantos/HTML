@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Jogo da Memória</title>
+	<link rel="stylesheet" type="text/css" href="../css/css.css">
+</head>
+<body style="background-color:black">
+	<h1 id="titulo">Jogo da Memória</h1>
+<p id="p"></p>
+<div id="tabela01" align="center">
+	<table border="4" id="borda">
+		<tr>
+			<td><h2>Placar</h2></td>
+		</tr>
+		<tr><td>Acertos: </td>
+			<td> <h4 id="a"></h4></td>
+		</tr>
+		<tr><td>Erros:</td>
+			<td><h4 id="e"></h4></td>
+		</tr>
+	</table>
+</div>
+<script type="text/javascript">
+	var escolha = 0
+	var acertos = 0
+	var erros = 0
+
+function contarAcertos(msg){
+		if(msg == 'Acertou'){
+			acertos++;
+			document.getElementById("a").innerHTML = acertos
+		} else {
+			erros++;
+			document.getElementById("e").innerHTML = erros
+		}
+	}
+	function clicar(e){
+		e.src = "../img/" + e.id + ".jpg"
+		setTimeout(jogo, 50)
+
+		function jogo(){
+			if(escolha == 0){
+				escolha = Number(e.id)
+			} else {
+				if(escolha > Number(e.id) && (escolha%2 == 0)){
+					if(Number(e.id) == (escolha - 1)){
+						contarAcertos('Acertou')
+						document.getElementById(escolha).onclick=''
+						document.getElementById(e.id).onclick=''
+						alert('Parabéns!')
+					} else {
+						contarAcertos('Errou!')
+						document.getElementById(escolha).src = "../img/frente.jpg"
+						document.getElementById(e.id).src = "../img/frente.jpg"
+						alert('Tente Novamente!')
+					} 
+					escolha = 0
+				} else if((escolha < Number(e.id)) && (escolha%2 != 0)) { 
+					if((escolha + 1) == Number(e.id)){
+						contarAcertos('Acertou')
+						document.getElementById(escolha).onclick=''
+						document.getElementById(e.id).onclick=''
+						alert('Parabéns!')
+					} else {
+						contarAcertos('Errou!')
+						document.getElementById(escolha).src = "../img/frente.jpg"
+						document.getElementById(e.id).src = "../img/frente.jpg"
+						alert('Tente Novamente!')
+					}
+					escolha = 0
+				} else {
+					contarAcertos('Errou!')
+					document.getElementById(escolha).src = "../img/frente.jpg"
+					document.getElementById(e.id).src = "../img/frente.jpg"
+					alert('Tente Novamente!')
+					escolha = 0
+				}
+				if (acertos==12) 
+				{
+					alert('Jogo Finalizado')
+				}
+				
+			}
+		}
+	}
+	function numerosAleatorios(){
+		var tabela = '<table><tr>',sorteio = []
+		while(sorteio.length < 24){
+			var aleatorio = Math.floor(Math.random() * 24);
+			if(sorteio.indexOf(aleatorio) == -1){
+				sorteio.push(aleatorio);
+			}
+		}
+		for(var i = 0; i < sorteio.length; i++){
+	tabela += '<td><img onclick="clicar(this)" id="'+ (sorteio[i] + 1) +'" src="../img/frente.jpg"></td>'
+
+			if((i+1)%6 == 0){
+				tabela += "</tr><tr>"
+			}
+		}
+		tabela += "</table>"
+		document.getElementById('container').innerHTML = tabela
+		document.getElementById('a').innerHTML=0
+		document.getElementById('e').innerHTML=0
+		acertos = 0
+	 	erros = 0
+	}
+</script>
+<div id='container' align="center"></div>
+<div id="a01" align="center" style="display: block;">
+<button onclick="numerosAleatorios()" id="a01" class="botao01">Começar o Jogo / Reset</button>
+</div>
+</body>
+</html>
